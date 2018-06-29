@@ -2,8 +2,9 @@
 
 The purpose of this project is to demonstrate the possibility of running WRF3.8  using Azure HPC Infrastructure.
 The WRF3.8.1 is a community model maintained by NCAR/UCAR [https://www.mmm.ucar.edu/weather-research-and-forecasting-model ]
- 
-Many times the scientists want to focus on the algorithm, instead of scalability, underlying hardware infrastructure and high availability. [Azure Batch service](https://docs.microsoft.com/en-us/azure/batch/batch-technical-overview) creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There is no cluster or job scheduler software to install, manage, or scale. Instead, you use [Batch APIs and tools](https://docs.microsoft.com/en-us/azure/batch/batch-apis-tools), command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
+WRF has been developed for various scenarios including atmospheric chemistry as described in here https://www.imk-ifu.kit.edu/829.php. It is published here https://www.sciencedirect.com/science/article/pii/S1352231099004021
+
+Usually scientists want to focus on the algorithm, instead of scalability, underlying hardware infrastructure and high availability. [Azure Batch service](https://docs.microsoft.com/en-us/azure/batch/batch-technical-overview) creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There is no cluster or job scheduler software to install, manage, or scale. Instead, you use [Batch APIs and tools](https://docs.microsoft.com/en-us/azure/batch/batch-apis-tools), command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
 
 This project shows how to deploy [WRF](http://www2.mmm.ucar.edu/wrf/users/wrfv3.8/wrf_model.html) software
 
@@ -155,4 +156,4 @@ Run the script and create the admin user on the first node
 
 Data courtesy of Lars Hufnagel, EMBL Heidelberg
 
-http://www.embl.de/research/units/cbb/hufnagel/
+
