@@ -51,7 +51,7 @@ The commands to be executed on your Linux Workstation
 az login
 az account show
 ```
-will show the available ids, e.g. "id": c45f88-90......4r" and the "isDefault" must be true. If you have several ids, make sure to set true to the id, you want to use.
+will show the available ids, e.g. "id": c45f88-90......4r" and the parameter "isDefault" must be true. If you have several ids, make sure to set true to the id, you want to use.
 ```
 az account set -s "your preferred subscription id"
 ```
@@ -64,7 +64,7 @@ Decide for the number of nodes you are going to run, e.g. 2, and you will get a 
 ```
 ./vmsscreate.sh 2
 ```
-Connect to the machine as shown in the output on the buttom
+After the VMSS is created, you will get the command how to connect to the first VM of your cluster
 ```
 ssh username@<ip> -p 50000
 ```
@@ -87,12 +87,10 @@ After the simulation you will get a result such as this. "Mean" is the average w
 
 ```
 
-
-## For throughput or production runs we recommend Azure Batch
+## For production runs we recommend Azure Batch
 
 Usually scientists want to focus on the algorithm, instead of scalability, underlying hardware infrastructure and high availability. [Azure Batch service](https://docs.microsoft.com/en-us/azure/batch/batch-technical-overview) creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There is no cluster or job scheduler software to install, manage, or scale. Instead, you use [Batch APIs and tools](https://docs.microsoft.com/en-us/azure/batch/batch-apis-tools), command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
 
-We are assuming you already created the Storage Account as well as the Batch Account using Azure Portal or Azure CLI (see the Troubleshooting section). Following preparation steps must be executed.
 
 1. Update the deployment script [deploy_script.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/deploy_script.sh)
 2. U
@@ -105,10 +103,7 @@ We are assuming you already created the Storage Account as well as the Batch Acc
 The logic included in a separate runme.tar file and the input data are uploaded separately. The example includes a single input file .h5 that is uploaded multiple times. This way we can simulate real scenario with multiple input files: 
 
 
-4. Edit the script and provide missing Batch Account Name, poolid and execute the script [01.redeploy.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/01.redeploy.sh) as follows:
-```
-./01.redeploy.sh ilastik
-```
+
 where 'ilastik' is the pool name.  The script creates the pool:
 ```
 poolid=ilastik
@@ -136,33 +131,11 @@ az batch pool resize --pool-id $poolid --target-dedicated 2
 ./02.run_job.sh ilastik
 ```
 
-The scripts creates a job and $k=2$ tasks on a pool called *ilastik*. Each task calls [run_task.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/run_task.sh) that in turns analyzes a single .h5 file.
-```
-az batch job create --id $JOBID --pool-id $poolid 
-for k in {1..2} 
-  do 
-    echo "starting task_$k ..."
-    az batch task create --job-id $JOBID --task-id "task_$k" --command-line "/mnt/batch/tasks/shared/run_task.sh $k > out.log"
-  done
-
-```
-
-6. Once the calculation is ready download the results to your local machine by:
-```
-03.download_results.sh $jobid
-```
-where $jobid identifies the job. You can find out this parameter while running [02.run_job.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/02.run_job.sh), from Azure Portal or from BatchLabs.
-
-You can visualize the results in [ImageJ](https://imagej.nih.gov/ij/), [Fiji](https://fiji.sc) or image processing software of your choice.
-
 ## Monitoring your jobs
 
 We encourage to use [BatchLabs](https://github.com/Azure/BatchLabs) for monitoring purposes. In addition, these set of commands will help to deal with problems during the execution.
 
-Run the script and create the admin user on the first node
-```
-04.diagnose.sh mypassword
-```
+
 
 * Remove the job
 > az batch job delete  --job-id $jobid  --account-endpoint $batchep --account-name $batchid --yes
@@ -192,6 +165,7 @@ Run the script and create the admin user on the first node
 
 ### Acknowledgement
 
+For the WRF model and the input data
 The University Corporation for Atmospheric Research
 The National Center for Atmospheric Research
 The UCAR Community Programs
