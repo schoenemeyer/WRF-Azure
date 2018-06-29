@@ -38,7 +38,7 @@ In addition to the substantial CPU power, the H-series offers diverse options fo
 https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-hpc
 
 
-## Fast Track
+## Fast Track using Vir
 For the impatient scientist and quick testing, this track gives you the complete software stack for WRF. The WRF zip file contains everything you need to run on Azure H-Series including netcdf etc.
 
 Prerequisite: Azure Subscription 
@@ -57,11 +57,19 @@ will show the available ids, e.g. "id": c45f88-90......4r" and the "isDefault" m
 ```
 az account set -s "your preferred subscription id"
 ```
+Create a resource group that contains your private infrastructure in your preferred region. A list of Azure regions can be found here https://azure.microsoft.com/en-us/global-infrastructure/regions/
+```
+az group create -n wrflab -l northeurope  
+
+```
 Decide for the number of nodes you are going to run, e.g. 2
 ```
 ./vmsscreate.sh 2
 wget https://hpccenth2lts.blob.core.windows.net/wrf/wrf.zip
 ```
+
+
+## Fast Track
 
 Usually scientists want to focus on the algorithm, instead of scalability, underlying hardware infrastructure and high availability. [Azure Batch service](https://docs.microsoft.com/en-us/azure/batch/batch-technical-overview) creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There is no cluster or job scheduler software to install, manage, or scale. Instead, you use [Batch APIs and tools](https://docs.microsoft.com/en-us/azure/batch/batch-apis-tools), command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
 
