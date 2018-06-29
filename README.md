@@ -2,9 +2,9 @@
 
 The purpose of this project is to demonstrate the possibility of running WRF3.8  using Azure HPC Infrastructure.
 The WRF3.8.1 is a community model maintained by NCAR/UCAR [https://www.mmm.ucar.edu/weather-research-and-forecasting-model ]
-WRF has been developed for various scenarios including atmospheric chemistry as described in here https://www.imk-ifu.kit.edu/829.php. The asscociated paper is published in https://www.sciencedirect.com/science/article/pii/S1352231099004021.
+WRF has been developed for various scenarios including simulating atmospheric chemistry as described in here https://www.imk-ifu.kit.edu/829.php. The asscociated paper is published in https://www.sciencedirect.com/science/article/pii/S1352231099004021.
 
-This project shows how to deploy [WRF](http://www2.mmm.ucar.edu/wrf/users/wrfv3.8/wrf_model.html) software
+This project shows how to run [WRF](http://www2.mmm.ucar.edu/wrf/users/wrfv3.8/wrf_model.html) in the Azure Infrastructure.
 
 The video below shows a typical result of WRF simulating a tropical storm.
 
@@ -44,12 +44,14 @@ For the impatient scientist and quick testing, this track gives you the complete
 Prerequisite: Azure Subscription 
 1. Open a [Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) session from the Azure Portal, or open a Linux session with Azure CLI v2.0, jq and zip packages installed. Here is the link how to install az cli on your workstation https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
 2. Create a Storage Account in Azure from the Portal https://ms.portal.azure.com/ 
-2. Clone the repository, `git clone https://github.com/az-cat/HPC-azbatch.git`
+2. Clone the repository, `git clone https://github.com/schoenemeyer/WRF3.8-in-Azure.git`
 3. Grant execute access to scripts `chmod +x *.sh`
-4. Run the [Linpack](./linpack/README.md) sample
+4. Create Virtual Machine Scale Set (https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview) for 2, 4, 8 or more nodes. Make sure you have enough quota to run your experiment. You can find on the portal a button for requesting higher core counts
 
-
+The commands to be executed on your Linux Workstation
 ```
+az login
+az account set -s "your subscription id"
 wget https://hpccenth2lts.blob.core.windows.net/wrf/wrf.zip
 ```
 
