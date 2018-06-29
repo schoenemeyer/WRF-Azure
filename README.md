@@ -2,10 +2,7 @@
 
 The purpose of this project is to demonstrate the possibility of running WRF3.8  using Azure HPC Infrastructure.
 The WRF3.8.1 is a community model maintained by NCAR/UCAR [https://www.mmm.ucar.edu/weather-research-and-forecasting-model ]
-WRF has been developed for various scenarios including atmospheric chemistry as described in here
-> https://www.imk-ifu.kit.edu/829.php. It is published here https://www.sciencedirect.com/science/article/pii/S1352231099004021
-
-Usually scientists want to focus on the algorithm, instead of scalability, underlying hardware infrastructure and high availability. [Azure Batch service](https://docs.microsoft.com/en-us/azure/batch/batch-technical-overview) creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There is no cluster or job scheduler software to install, manage, or scale. Instead, you use [Batch APIs and tools](https://docs.microsoft.com/en-us/azure/batch/batch-apis-tools), command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
+WRF has been developed for various scenarios including atmospheric chemistry as described in here https://www.imk-ifu.kit.edu/829.php. The asscociated paper is published in https://www.sciencedirect.com/science/article/pii/S1352231099004021.
 
 This project shows how to deploy [WRF](http://www2.mmm.ucar.edu/wrf/users/wrfv3.8/wrf_model.html) software
 
@@ -46,6 +43,7 @@ For the impatient scientist and quick testing, this track gives you the complete
 
 Prerequisite: Azure Subscription 
 1. Open a [Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) session from the Azure Portal, or open a Linux session with Azure CLI v2.0, jq and zip packages installed. Here is the link how to install az cli on your workstation https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+2. Create a Storage Account in Azure from the Portal https://ms.portal.azure.com/ 
 2. Clone the repository, `git clone https://github.com/az-cat/HPC-azbatch.git`
 3. Grant execute access to scripts `chmod +x *.sh`
 4. Run the [Linpack](./linpack/README.md) sample
@@ -54,6 +52,8 @@ Prerequisite: Azure Subscription
 ```
 wget https://hpccenth2lts.blob.core.windows.net/wrf/wrf.zip
 ```
+
+Usually scientists want to focus on the algorithm, instead of scalability, underlying hardware infrastructure and high availability. [Azure Batch service](https://docs.microsoft.com/en-us/azure/batch/batch-technical-overview) creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There is no cluster or job scheduler software to install, manage, or scale. Instead, you use [Batch APIs and tools](https://docs.microsoft.com/en-us/azure/batch/batch-apis-tools), command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
 
 We are assuming you already created the Storage Account as well as the Batch Account using Azure Portal or Azure CLI (see the Troubleshooting section). Following preparation steps must be executed.
 
