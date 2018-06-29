@@ -20,6 +20,9 @@ In this benchmark  from [NCAR](http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used
 
 > wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
 
+## Performance in Azure
+
+https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf_atl_shear_anim.gif
 
 Once downloaded extract the files and identify *pixelClassification.ilp* file with the algorithm as well as the input image *drosophila_00-49.h5*. To show the scaling possibilities we have created a multiple copies of the *drosophila_00-49.h5*. Each task analyzes one copy of the image on a separate VM by executing:
 
