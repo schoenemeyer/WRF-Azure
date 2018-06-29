@@ -9,7 +9,7 @@ This project shows how to deploy [WRF](http://www2.mmm.ucar.edu/wrf/users/wrfv3.
 
 These are the result of the processing. .
 
-![After processing](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/resources/demoSmall.gif)
+![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf_atl_shear_anim.gif)
 
 You can also learn about installing WRF in this video
 
