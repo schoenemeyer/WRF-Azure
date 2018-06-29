@@ -15,7 +15,7 @@ You can also learn about installing WRF in this video
 https://www.youtube.com/watch?v=EMO6jreKi6o
 
 ## WRF CONUS 12km Benchmark
-In this benchmark from (http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. You can download the input files as follows  from http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3 or from Azure Blob Storage
+In this benchmark from (http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. You can download the input files as follows from http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3 or from Azure Blob Storage
 ```
 wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
 wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
@@ -38,7 +38,7 @@ In addition to the substantial CPU power, the H-series offers diverse options fo
 https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-hpc
 
 
-## Fast Track using Vir
+## Fast Track using Virtual Machine Scale Sets
 For the impatient scientist and quick testing, this track gives you the complete software stack for WRF. The WRF zip file contains everything you need to run on Azure H-Series including netcdf etc.
 
 Prerequisite: Azure Subscription 
@@ -65,33 +65,32 @@ az group create -n wrflab -l northeurope
 Decide for the number of nodes you are going to run, e.g. 2
 ```
 ./vmsscreate.sh 2
-wget https://hpccenth2lts.blob.core.windows.net/wrf/wrf.zip
+```
+Connect to the machine as shown in the output on the buttom
+```
+ssh username@<ip> -p 50000
+./install-run-wrf.sh
+
+
 ```
 
 
-## Fast Track
+## For throughput or production runs we recommend Azure Batch
 
 Usually scientists want to focus on the algorithm, instead of scalability, underlying hardware infrastructure and high availability. [Azure Batch service](https://docs.microsoft.com/en-us/azure/batch/batch-technical-overview) creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There is no cluster or job scheduler software to install, manage, or scale. Instead, you use [Batch APIs and tools](https://docs.microsoft.com/en-us/azure/batch/batch-apis-tools), command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
 
 We are assuming you already created the Storage Account as well as the Batch Account using Azure Portal or Azure CLI (see the Troubleshooting section). Following preparation steps must be executed.
 
 1. Update the deployment script [deploy_script.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/deploy_script.sh)
-2. Update the [JSON file](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/pool-shipyard.json) with the reference to the  dependencies and the deployment script. Update the container name in the *blobSource* tag. 
+2. U
 3
 
 ```bash
  tar -cf runme.tar pixelClassification.ilp run_task.sh
- az storage blob upload -f runme.tar --account-name shipyarddata --account-key longkey== -c drosophila --name runme.tar
- az storage blob upload -f deploy_script.sh --account-name shipyarddata --account-key longkey== -c drosophila --name deploy_script.sh
+ 
 ```
 The logic included in a separate runme.tar file and the input data are uploaded separately. The example includes a single input file .h5 that is uploaded multiple times. This way we can simulate real scenario with multiple input files: 
 
-```
-for k in {1..2}
-do
-az storage blob upload -f drosophila_00-49.h5 --account-name shipyarddata --account-key longkey== -c drosophila --name drosophila_00-49_$k.h5
- done
-```
 
 4. Edit the script and provide missing Batch Account Name, poolid and execute the script [01.redeploy.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/01.redeploy.sh) as follows:
 ```
@@ -143,7 +142,7 @@ where $jobid identifies the job. You can find out this parameter while running [
 
 You can visualize the results in [ImageJ](https://imagej.nih.gov/ij/), [Fiji](https://fiji.sc) or image processing software of your choice.
 
-## Troubleshooting
+## Monitoring your jobs
 
 We encourage to use [BatchLabs](https://github.com/Azure/BatchLabs) for monitoring purposes. In addition, these set of commands will help to deal with problems during the execution.
 
@@ -180,6 +179,8 @@ Run the script and create the admin user on the first node
 
 ### Acknowledgement
 
-Data courtesy of Lars Hufnagel, EMBL Heidelberg
+The University Corporation for Atmospheric Research
+The National Center for Atmospheric Research
+The UCAR Community Programs
 
 
