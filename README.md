@@ -23,11 +23,10 @@ wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00
 
 ## Performance in Azure
 
-Here is the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure. The simulation speed can be calculated by running this command after finishing the simulation. Please use the  https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/stats.awk 
+Here is the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure. The simulation speed can be calculated by running this command after finishing the simulation. For performance measurement you will need the file stats.awk which can be also download from this repository https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/stats.awk 
 ```
 grep 'Timing for main' rsl.error.0000 | tail -149 | awk '{print $9}' | awk -f stats.awk
 ```
-
 This command will output the average time per time step as the mean value. Simulation speed is the model time step, 72 seconds, divided by average time per time step. You can also derive the sustained Gigaflops per second which is simulation speed times 0.418 for this case.
 
 ![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf3.8.gif)
@@ -39,11 +38,10 @@ https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-hpc
 
 
 ## Fast Track using Virtual Machine Scale Sets
-For the impatient scientist and quick testing, this track gives you the complete software stack for WRF. The WRF zip file contains everything you need to run on Azure H-Series including netcdf etc.
+For the impatient scientist and quick testing, this track gives you the complete software stack for WRF. The WRF zip file contains everything you need to run on Azure H-Series including netcdf etc.. The expected time to finish this exercise is 20 min if you have your subscription and enough quota for H series family.
 
-Prerequisite: Azure Subscription 
+
 1. Open a [Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) session from the Azure Portal, or open a Linux session with Azure CLI v2.0, jq and zip packages installed. Here is the link how to install az cli on your workstation https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
-2. Create a Storage Account in Azure from the Portal https://ms.portal.azure.com/ 
 2. Clone the repository, `git clone https://github.com/schoenemeyer/WRF3.8-in-Azure.git`
 3. Grant execute access to scripts `chmod +x *.sh`
 4. Create Virtual Machine Scale Set (https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview) for 2, 4, 8 or more nodes. Make sure you have enough quota to run your experiment. You can find on the portal a button for requesting higher core counts
