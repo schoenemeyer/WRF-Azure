@@ -23,7 +23,7 @@ In this benchmark  from [NCAR](http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used
 ## Performance in Azure
 
 Here is the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure
-https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf3.8.gif
+![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf3.8.gif)
 
 Detailed information on our H16r series in Azure. The Azure H-series virtual machines are built on the Intel Haswell E5-2667 V3 processor technology featuring DDR4 memory and SSD-based temporary storage.
 
@@ -31,11 +31,11 @@ In addition to the substantial CPU power, the H-series offers diverse options fo
 https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-hpc
 
 
-Once downloaded extract the files and identify *pixelClassification.ilp* file with the algorithm as well as the input image *drosophila_00-49.h5*. To show the scaling possibilities we have created a multiple copies of the *drosophila_00-49.h5*. Each task analyzes one copy of the image on a separate VM by executing:
+## Fast Track
 
-> ./run_ilastik.sh --headless --project=pixelClassification.ilp drosophila_00-49.h5 --export_source="Simple Segmentation" --output_filename_format="../out/{nickname}{slice_index}.tiff" --output_format="multipage tiff sequence"
-
-## Preparation phase
+```
+./01.redeploy.sh ilastik
+```
 
 We are assuming you already created the Storage Account as well as the Batch Account using Azure Portal or Azure CLI (see the Troubleshooting section). Following preparation steps must be executed.
 
