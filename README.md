@@ -62,7 +62,7 @@ Create a resource group that contains your private infrastructure in your prefer
 az group create -n wrflab -l northeurope  
 
 ```
-Decide for the number of nodes you are going to run, e.g. 2
+Decide for the number of nodes you are going to run, e.g. 2, and you will get a cluster with 2 nodes connected with FDR and CentOS 7.4 images with Intel MPI 5.1.3.223.
 ```
 ./vmsscreate.sh 2
 ```
@@ -74,7 +74,15 @@ sudo yum -y install devtoolset-4-gcc*
 scl enable devtoolset-4 bash
 ssh 
 ./install-run-wrf.sh
-
+```
+After the simulation you will get a result such as this. "Mean" is the average wallclock time per model time step. That means WRF needs with two nodes in Azure 0.77 sec for 72 sec of model simulation time.
+```
+    items:       149
+      max:         1.318440
+      min:         0.698280
+      sum:       115.055320
+     mean:         0.772183
+ mean/max:         0.585680
 
 ```
 
