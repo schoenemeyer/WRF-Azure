@@ -69,6 +69,9 @@ Decide for the number of nodes you are going to run, e.g. 2, and you will get a 
 Connect to the machine as shown in the output on the buttom
 ```
 ssh username@<ip> -p 50000
+```
+Doublecheck whether the hostname is correctly set in the hostfile
+```
 sudo yum -y install centos-release-scl
 sudo yum -y install devtoolset-4-gcc*
 scl enable devtoolset-4 bash
