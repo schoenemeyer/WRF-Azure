@@ -69,6 +69,10 @@ Decide for the number of nodes you are going to run, e.g. 2
 Connect to the machine as shown in the output on the buttom
 ```
 ssh username@<ip> -p 50000
+sudo yum -y install centos-release-scl
+sudo yum -y install devtoolset-4-gcc*
+scl enable devtoolset-4 bash
+ssh 
 ./install-run-wrf.sh
 
 
