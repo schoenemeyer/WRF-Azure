@@ -22,7 +22,13 @@ In this benchmark  from [NCAR](http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used
 
 ## Performance in Azure
 
-Here is the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure
+Here is the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure. The simulation speed can be calculated by running this command after finishing the simulation.
+```
+grep 'Timing for main' rsl.error.0000 | tail -149 | awk '{print $9}' | awk -f stats.awk
+```
+
+This command will output the average time per time step as the mean value. Simulation speed is the model time step, 72 seconds, divided by average time per time step. You can also derive the sustained Gigaflops per second which is simulation speed times 0.418 for this case based on a measured operation count of 30.1 billion floating point operations per second (or simply the operation count divided by the average time per time step).
+
 ![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf3.8.gif)
 
 Detailed information on our H16r series in Azure. The Azure H-series virtual machines are built on the Intel Haswell E5-2667 V3 processor technology featuring DDR4 memory and SSD-based temporary storage.
