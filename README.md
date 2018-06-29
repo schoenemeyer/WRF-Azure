@@ -16,13 +16,15 @@ https://www.youtube.com/watch?v=EMO6jreKi6o
 
 ## WRF CONUS 12km Benchmark
 In this benchmark  from [NCAR](http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. You can download the input files as follows  from http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3 or from Azure Blob Storage
-> wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
+```
+wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
 
-> wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
+wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
+```
 
 ## Performance in Azure
 
-Here is the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure. The simulation speed can be calculated by running this command after finishing the simulation.
+Here is the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure. The simulation speed can be calculated by running this command after finishing the simulation. Please use the  https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/stats.awk 
 ```
 grep 'Timing for main' rsl.error.0000 | tail -149 | awk '{print $9}' | awk -f stats.awk
 ```
