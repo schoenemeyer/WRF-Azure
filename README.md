@@ -2,7 +2,8 @@
 
 The purpose of this project is to demonstrate the possibility of running WRF3.8  using Azure HPC Infrastructure.
 The WRF3.8.1 is a community model maintained by NCAR/UCAR [https://www.mmm.ucar.edu/weather-research-and-forecasting-model ]
-WRF has been developed for various scenarios including atmospheric chemistry as described in here https://www.imk-ifu.kit.edu/829.php. It is published here https://www.sciencedirect.com/science/article/pii/S1352231099004021
+WRF has been developed for various scenarios including atmospheric chemistry as described in here
+> https://www.imk-ifu.kit.edu/829.php. It is published here https://www.sciencedirect.com/science/article/pii/S1352231099004021
 
 Usually scientists want to focus on the algorithm, instead of scalability, underlying hardware infrastructure and high availability. [Azure Batch service](https://docs.microsoft.com/en-us/azure/batch/batch-technical-overview) creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There is no cluster or job scheduler software to install, manage, or scale. Instead, you use [Batch APIs and tools](https://docs.microsoft.com/en-us/azure/batch/batch-apis-tools), command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
 
@@ -30,21 +31,28 @@ Here is the performance for the CONUS 12km Benchmark you can expect on our H16r 
 grep 'Timing for main' rsl.error.0000 | tail -149 | awk '{print $9}' | awk -f stats.awk
 ```
 
-This command will output the average time per time step as the mean value. Simulation speed is the model time step, 72 seconds, divided by average time per time step. You can also derive the sustained Gigaflops per second which is simulation speed times 0.418 for this case based on a measured operation count of 30.1 billion floating point operations per second (or simply the operation count divided by the average time per time step).
+This command will output the average time per time step as the mean value. Simulation speed is the model time step, 72 seconds, divided by average time per time step. You can also derive the sustained Gigaflops per second which is simulation speed times 0.418 for this case.
 
 ![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf3.8.gif)
 
-Detailed information on our H16r series in Azure. The Azure H-series virtual machines are built on the Intel Haswell E5-2667 V3 processor technology featuring DDR4 memory and SSD-based temporary storage.
+The Azure H-series virtual machines are built on the Intel Haswell E5-2667 V3 processor technology featuring DDR4 memory and SSD-based temporary storage.
 
 In addition to the substantial CPU power, the H-series offers diverse options for low latency RDMA networking using FDR InfiniBand and several memory configurations to support memory intensive computational requirements.
 https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-hpc
 
 
 ## Fast Track
-For the impatient scientist: This track gives you the complete software stack for WRF. The WRF zip file contains everything you need to run on Azure H-Series including netcdf etc.
+For the impatient scientist and quick testing, this track gives you the complete software stack for WRF. The WRF zip file contains everything you need to run on Azure H-Series including netcdf etc.
+
+Prerequisite: Azure Subscription 
+1. Open a [Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) session from the Azure Portal, or open a Linux session with Azure CLI v2.0, jq and zip packages installed. Here is the link how to install az cli on your workstation https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+2. Clone the repository, `git clone https://github.com/az-cat/HPC-azbatch.git`
+3. Grant execute access to scripts `chmod +x *.sh`
+4. Run the [Linpack](./linpack/README.md) sample
+
 
 ```
-./01.redeploy.sh ilastik
+wget https://hpccenth2lts.blob.core.windows.net/wrf/wrf.zip
 ```
 
 We are assuming you already created the Storage Account as well as the Batch Account using Azure Portal or Azure CLI (see the Troubleshooting section). Following preparation steps must be executed.
