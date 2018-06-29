@@ -10,7 +10,7 @@ The video below shows a typical result of WRF simulating a tropical storm.
 
 ![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf_atl_shear_anim.gif)
 <img src="https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/4-Figure2-1.png" alt="WRF" style="width: 80px;"/>
-
+<img src="https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/4-Figure2-1.png" width="48">
 
 You can also learn about installing WRF in this video
 
