@@ -15,9 +15,11 @@ You can also learn about installing WRF in this video
 
 https://www.youtube.com/watch?v=EMO6jreKi6o
 
-## Ilastik on Azure
-In this project [Drosophila 3D+t](http://data.ilastik.org/drosophila.zip) data set from [Hufnagel Grup, EMBL Heidelberg](http://www.embl.de/research/units/cbb/hufnagel/) is used. You can download the input images as follows:
-> wget http://data.ilastik.org/drosophila.zip
+## WRF CONUS 12km Benchmark
+In this benchmark  from [NCARHufnagel  Heidelberg](http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. You can download the input files as follows  from http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3 or from Azure Blob Storage
+> wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
+> wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
+
 
 Once downloaded extract the files and identify *pixelClassification.ilp* file with the algorithm as well as the input image *drosophila_00-49.h5*. To show the scaling possibilities we have created a multiple copies of the *drosophila_00-49.h5*. Each task analyzes one copy of the image on a separate VM by executing:
 
