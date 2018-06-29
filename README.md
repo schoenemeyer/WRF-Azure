@@ -51,7 +51,15 @@ Prerequisite: Azure Subscription
 The commands to be executed on your Linux Workstation
 ```
 az login
-az account set -s "your subscription id"
+az account show
+```
+will show the available ids, e.g. "id": c45f88-90......4r" and the "isDefault" must be true. If you have several ids, make sure to set true to the id, you want to use.
+```
+az account set -s "your preferred subscription id"
+```
+Decide for the number of nodes you are going to run, e.g. 2
+```
+./vmsscreate.sh 2
 wget https://hpccenth2lts.blob.core.windows.net/wrf/wrf.zip
 ```
 
