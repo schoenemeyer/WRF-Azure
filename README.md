@@ -22,7 +22,14 @@ In this benchmark  from [NCAR](http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used
 
 ## Performance in Azure
 
-https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf_atl_shear_anim.gif
+Here is the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure
+https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf3.8.gif
+
+Detailed information on our H16r series in Azure. The Azure H-series virtual machines are built on the Intel Haswell E5-2667 V3 processor technology featuring DDR4 memory and SSD-based temporary storage.
+
+In addition to the substantial CPU power, the H-series offers diverse options for low latency RDMA networking using FDR InfiniBand and several memory configurations to support memory intensive computational requirements.
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-hpc
+
 
 Once downloaded extract the files and identify *pixelClassification.ilp* file with the algorithm as well as the input image *drosophila_00-49.h5*. To show the scaling possibilities we have created a multiple copies of the *drosophila_00-49.h5*. Each task analyzes one copy of the image on a separate VM by executing:
 
