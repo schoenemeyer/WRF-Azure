@@ -6,7 +6,7 @@ WRF has been developed for various scenarios including simulating atmospheric ch
 
 This project shows how to run [WRF](http://www2.mmm.ucar.edu/wrf/users/wrfv3.8/wrf_model.html) in the Azure Infrastructure.
 
-The video below shows a typical result of WRF simulating a tropical storm. The picture to the right is the 3rd hour of the 12km CONUS benchmark.
+The video below shows a typical result of WRF simulating a tropical storm. The picture to the right shows the domain and the temperature and pressure after the 3rd hour of the 12km CONUS weather simulation.
 
 ![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf_atl_shear_anim.gif)
 <img src="https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/4-Figure2-1.png" width="252">
