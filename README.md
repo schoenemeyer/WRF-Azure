@@ -6,8 +6,7 @@ Many times the scientists want to focus on the algorithm, instead of scalability
 
 This project shows how to deploy [WRF](http://www2.mmm.ucar.edu/wrf/users/wrfv3.8/wrf_model.html) software
 
-
-These are the result of the processing. .
+The video below shows a typical result of WRF simulating a tropical storm.
 
 ![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf_atl_shear_anim.gif)
 
@@ -16,8 +15,9 @@ You can also learn about installing WRF in this video
 https://www.youtube.com/watch?v=EMO6jreKi6o
 
 ## WRF CONUS 12km Benchmark
-In this benchmark  from [NCARHufnagel  Heidelberg](http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. You can download the input files as follows  from http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3 or from Azure Blob Storage
+In this benchmark  from [NCAR](http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. You can download the input files as follows  from http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3 or from Azure Blob Storage
 > wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
+
 > wget  https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
 
 
@@ -31,7 +31,7 @@ We are assuming you already created the Storage Account as well as the Batch Acc
 
 1. Update the deployment script [deploy_script.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/deploy_script.sh)
 2. Update the [JSON file](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/pool-shipyard.json) with the reference to the  dependencies and the deployment script. Update the container name in the *blobSource* tag. 
-3. Compress and upload a tar ball with the pixelClassification.ilp and [run_task.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/run_task.sh) to the Blob storage by executing [00.Upload.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/00.Upload.sh).
+3
 
 ```bash
  tar -cf runme.tar pixelClassification.ilp run_task.sh
