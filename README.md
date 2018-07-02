@@ -63,7 +63,7 @@ az group create -n wrflab -l northeurope
 ```
 Decide for the number of nodes you are going to run, e.g. 2, and you will get a cluster with 2 nodes connected with FDR and CentOS 7.4 images with Intel MPI 5.1.3.223.
 ```
-./vmsscreate.sh 2
+./vmss-wrf.sh 2
 ```
 After the VMSS is created, you will get the command how to connect to the first VM of your cluster
 ```
@@ -90,79 +90,7 @@ After the simulation you will get a result such as this. "Mean" is the average w
 
 ## For production runs we recommend Azure Batch
 
-Usually scientists want to focus on the algorithm, instead of scalability, underlying hardware infrastructure and high availability. [Azure Batch service](https://docs.microsoft.com/en-us/azure/batch/batch-technical-overview) creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There is no cluster or job scheduler software to install, manage, or scale. Instead, you use [Batch APIs and tools](https://docs.microsoft.com/en-us/azure/batch/batch-apis-tools), command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
-
-
-1. Update the deployment script [deploy_script.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/deploy_script.sh)
-2. U
-3
-
-```bash
- tar -cf runme.tar pixelClassification.ilp run_task.sh
- 
-```
-The logic included in a separate runme.tar file and the input data are uploaded separately. The example includes a single input file .h5 that is uploaded multiple times. This way we can simulate real scenario with multiple input files: 
-
-
-
-where 'ilastik' is the pool name.  The script creates the pool:
-```
-poolid=ilastik
-GROUPID=demorg
-BATCHID=matlabb
-az batch account login -g $GROUPID -n $BATCHID
-
-az batch pool create --id $poolid --image "Canonical:UbuntuServer:16.04.0-LTS" --node-agent-sku-id "batch.node.ubuntu 16.04"  --vm-size Standard_D11 --verbose
-```
-
-assigns a json to a pool
-```
-az batch pool set --pool-id $poolid --json-file pool-shipyard.json 
-```
-
-and resizes the pool. This is the moment when the VMs are provisioned and the deploy_script.sh executes on each machine.
-```
-az batch pool resize --pool-id $poolid --target-dedicated 2 
-```
-
-## Execution Phase
-
-5. Edit the script and provide missing data and execute the script [02.run_job.sh](https://github.com/lmiroslaw/azure-batch-ilastik/blob/master/02.run_job.sh) as follows:
-```
-./02.run_job.sh ilastik
-```
-
-## Monitoring your jobs
-
-We encourage to use [BatchLabs](https://github.com/Azure/BatchLabs) for monitoring purposes. In addition, these set of commands will help to deal with problems during the execution.
-
-
-
-* Remove the job
-> az batch job delete  --job-id $jobid  --account-endpoint $batchep --account-name $batchid --yes
-
-* We can check the status of the pool to see when it has finished resizing.
-> az batch pool show --pool-id $poolid  --account-endpoint $batchep --account-name $batchid
-
-* List the compute nodes running in a pool.
-> az batch node list --pool-id $poolid --account-endpoint $batchep --account-name $batchid -o table
-
-* List remote login connections for a specific node, for example *tvm-3550856927_1-20170904t111707z* 
-> az batch node remote-login-settings show --pool-id ilastik --node-id tvm-3550856927_1-20170904t111707z --account-endpoint $batchep --account-name $batchid -o table
-
-* Remove the pool
-> az batch pool delete --pool-id $poolid  --account-endpoint $batchep --account-name $batchid
-
-* Create the resource group and storage account. For example:
- ```
- az group create -n tilastik -l westeurope
- az storage account create -n ilastiksstorage -l westeurope -g tilastik
-```
-* Get the connection string for the Azure Storage
-> az storage account show-connection-string -n ilastiksstorage -g tilastik
-
-* Create the azure batch service
-> az batch account create -n bilastik -g tilastik
+You can visit the other Gitlab 
 
 ### Acknowledgement
 
