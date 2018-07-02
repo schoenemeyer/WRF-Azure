@@ -71,10 +71,6 @@ ssh username@<ip> -p 50000
 ```
 Doublecheck whether the hostname is correctly set in the hostfile
 ```
-sudo yum -y install centos-release-scl
-sudo yum -y install devtoolset-4-gcc*
-scl enable devtoolset-4 bash
-
 ./install-run-wrf.sh
 ```
 After the simulation you will get a result such as this. "Mean" is the average wallclock time per model time step. That means WRF needs with two nodes in Azure 0.77 sec for 72 sec of model simulation time.
