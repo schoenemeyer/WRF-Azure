@@ -43,6 +43,7 @@ echo "Connect  ssh thomas@"$ipm" -p 50000 "
 scp -P 50000 thomas@$ipm:/home/thomas/hostname1 .
 echo "create hostlist" 
 namehost=$(cat hostname1)
+cat namehost
 rm -f hostfile
 # Create hostfile for MPI Command
 echo "$namehost" | rev | cut -c 2- | rev > naho
@@ -52,11 +53,11 @@ for (( i=0; i<$1; i++))
    echo " $nah$i" >> hostfile
    done
 cat hostfile
+scp -P 50000 ./hostfile thomas@$ipm:/home/thomas
 #Deploy gcc5.3.1 installation on all nodes
 for (( i=0; i<$1; i++))
    do
-scp -P 5000$i ./hostfile thomas@$ipm:/home/thomas
-ssh  thomas@"$ipm" -p 50000 /bin/bash << EOF
+ssh  thomas@"$ipm" -p 5000$i /bin/bash << EOF
 hostname > hostname1
 sudo yum -y install centos-release-scl
 sudo yum -y install devtoolset-4-gcc*
@@ -66,7 +67,7 @@ echo "create scp-script"
 rm -f install-run-wrf.sh
 echo "#!/bin/bash" >> install-run-wrf.sh
 echo "ulimit -s unlimited" >> install-run-wrf.sh
-echo " export LD_LIBRARY_PATH=./:"'$'"LD_LIBRARY_PATH"  >> install-run-wrf.sh
+echo "export LD_LIBRARY_PATH=./:"'$'"LD_LIBRARY_PATH"  >> install-run-wrf.sh
 echo "export INTELMPI_ROOT=/opt/intel/impi/5.1.3.223 " >> install-run-wrf.sh
 echo "export I_MPI_FABRICS=shm:dapl " >> install-run-wrf.sh
 echo "export I_MPI_DAPL_PROVIDER=ofa-v2-ib0 " >> install-run-wrf.sh
