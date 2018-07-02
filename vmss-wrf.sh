@@ -25,7 +25,7 @@ else
 fi
 echo "List Connection Info "
 sleep 10s
-rm -f list-instance node1 hostname1
+rm -f list-instance node1 hostnamem
 az vmss list-instance-connection-info --name wrfconus --resource-group wrflab >> list-instance
 cat list-instance
 grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' list-instance >> node1
@@ -40,10 +40,10 @@ scp -P 50000 ~/.ssh/id_rsa thomas@$ipm:/home/thomas/.ssh
 scp -P 50000 ~/.ssh/id_rsa.pub  thomas@$ipm:/home/thomas/.ssh
 scp -P 50000 ./msglen.txt thomas@$ipm:/home/thomas
 echo "Connect  ssh thomas@"$ipm" -p 50000 "
-scp -P 50000 thomas@$ipm:/home/thomas/hostname1 .
+scp -P 50000 thomas@$ipm:/home/thomas/hostnamem .
+cat hostnamem
 echo "create hostlist" 
-namehost=$(cat hostname1)
-cat namehost
+namehost=$(cat hostnamem)
 rm -f hostfile
 # Create hostfile for MPI Command
 echo "$namehost" | rev | cut -c 2- | rev > naho
@@ -58,7 +58,7 @@ scp -P 50000 ./hostfile thomas@$ipm:/home/thomas
 for (( i=0; i<$1; i++))
    do
 ssh  thomas@"$ipm" -p 5000$i /bin/bash << EOF
-hostname > hostname1
+hostname > hostnamem
 sudo yum -y install centos-release-scl
 sudo yum -y install devtoolset-4-gcc*
 EOF
@@ -108,6 +108,7 @@ echo " mpirun -np $((16*$1)) -perhost 16 -hostfile ./hostfile ./wrf.exe "
 echo " grep 'Timing for main' rsl.error.0000 | tail -149 | awk '{print"' $9'"}' | awk -f stats.awk"
 
 echo "Connect  ssh thomas@"$ipm" -p 50000 "
+echo "./install-run-wrf.sh"
 echo "Content of your hostfile "
 cat hostfile
 echo -n "Do you want to delete the new VM Scaleset (y/n)? "
