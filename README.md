@@ -4,8 +4,6 @@ The purpose of this project is to demonstrate the possibility of running WRF3.8 
 The WRF3.8.1 is a community model maintained by NCAR/UCAR [https://www.mmm.ucar.edu/weather-research-and-forecasting-model ]
 WRF has been developed for various scenarios including simulating atmospheric chemistry as described in here https://www.imk-ifu.kit.edu/829.php. The asscociated paper is published in https://www.sciencedirect.com/science/article/pii/S1352231099004021.
 
-This project shows how to run [WRF](http://www2.mmm.ucar.edu/wrf/users/wrfv3.8/wrf_model.html) in the Azure Infrastructure.
-
 The video below shows a typical result of WRF simulating a tropical storm. The picture to the right shows the domain and the temperature and pressure after the 3rd hour of the 12km CONUS weather simulation.
 
 ![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf_atl_shear_anim.gif)
