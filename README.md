@@ -20,7 +20,7 @@ In this benchmark from (http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. The i
 
 ```
 https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
-https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
+https://hpccenth2lts.blob.core.windows.net/wrf/wrf/wrfbdy_d01
 ```
 
 ## Performance in Azure
