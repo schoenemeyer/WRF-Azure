@@ -40,6 +40,9 @@ scp -P 50000 ~/.ssh/id_rsa thomas@$ipm:/home/thomas/.ssh
 scp -P 50000 ~/.ssh/id_rsa.pub  thomas@$ipm:/home/thomas/.ssh
 scp -P 50000 ./msglen.txt thomas@$ipm:/home/thomas
 echo "Connect  ssh thomas@"$ipm" -p 50000 "
+ssh  thomas@"$ipm" -p 50000 /bin/bash << EOF
+hostname > hostnamem
+EOF
 scp -P 50000 thomas@$ipm:/home/thomas/hostnamem .
 cat hostnamem
 echo "create hostlist" 
@@ -57,12 +60,12 @@ scp -P 50000 ./hostfile thomas@$ipm:/home/thomas
 #Deploy gcc5.3.1 installation on all nodes
 for (( i=0; i<$1; i++))
    do
-ssh  thomas@"$ipm" -p 5000$i /bin/bash << EOF
-hostname > hostnamem
-sudo yum -y install centos-release-scl
-sudo yum -y install devtoolset-4-gcc*
-EOF
+    ssh  thomas@"$ipm" -p 5000$i hostname > hostnamem
+    ssh  thomas@"$ipm" -p 5000$i sudo yum -y install centos-release-scl
+    ssh  thomas@"$ipm" -p 5000$i sudo yum -y install devtoolset-4-gcc*
+   EOF
    done
+ 
 echo "create scp-script" 
 rm -f install-run-wrf.sh
 echo "#!/bin/bash" >> install-run-wrf.sh
