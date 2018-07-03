@@ -82,7 +82,7 @@ echo " unzip wrf"  >> install-run-wrf.sh
 echo " rm wrf.zip"  >> install-run-wrf.sh 
 for (( i=1; i<$1; i++))
    do
-   echo "scp -r * $user@wrfco250600000$i:~" >> install-run-wrf.sh
+   echo "scp -r * $user@$nah$i:~" >> install-run-wrf.sh
    done
 echo " wget https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00" >> install-run-wrf.sh
 echo " wget https://hpccenth2lts.blob.core.windows.net/wrf/wrfbdy_d01" >> install-run-wrf.sh
