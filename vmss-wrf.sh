@@ -1,5 +1,6 @@
 #!/bin/bash
 #Usage vmsscreate.sh <numberofnodes> 
+user=<username>
 #Custom IMAGE
 echo -n "Do you want to delete the VM Scaleset (y/n)? "
 read answerd
@@ -36,14 +37,14 @@ cat << EOF > ./msglen.txt
 2
 8
 EOF
-scp -P 50000 ~/.ssh/id_rsa thomas@$ipm:/home/thomas/.ssh
-scp -P 50000 ~/.ssh/id_rsa.pub  thomas@$ipm:/home/thomas/.ssh
-scp -P 50000 ./msglen.txt thomas@$ipm:/home/thomas
-echo "Connect  ssh thomas@"$ipm" -p 50000 "
-ssh  thomas@"$ipm" -p 50000 /bin/bash << EOF
+scp -P 50000 ~/.ssh/id_rsa $user@$ipm:~/.ssh
+scp -P 50000 ~/.ssh/id_rsa.pub  $user@$ipm:~/.ssh
+scp -P 50000 ./msglen.txt $user@$ipm:~
+echo "Connect  ssh $user@"$ipm" -p 50000 "
+ssh  $user@"$ipm" -p 50000 /bin/bash << EOF
 hostname > hostnamem
 EOF
-scp -P 50000 thomas@$ipm:/home/thomas/hostnamem .
+scp -P 50000 $user@$ipm:~/hostnamem .
 cat hostnamem
 echo "create hostlist" 
 namehost=$(cat hostnamem)
@@ -56,13 +57,13 @@ for (( i=0; i<$1; i++))
    echo " $nah$i" >> hostfile
    done
 cat hostfile
-scp -P 50000 ./hostfile thomas@$ipm:/home/thomas
+scp -P 50000 ./hostfile $user@$ipm:~
 #Deploy gcc5.3.1 installation on all nodes
 for (( i=0; i<$1; i++))
    do
-    ssh  thomas@"$ipm" -p 5000$i hostname > hostnamem
-    ssh  thomas@"$ipm" -p 5000$i sudo yum -y install centos-release-scl
-    ssh  thomas@"$ipm" -p 5000$i sudo yum -y install devtoolset-4-gcc*
+    ssh  $user@"$ipm" -p 5000$i hostname > hostnamem
+    ssh  $user@"$ipm" -p 5000$i sudo yum -y install centos-release-scl
+    ssh  $user@"$ipm" -p 5000$i sudo yum -y install devtoolset-4-gcc*
    EOF
    done
  
@@ -81,13 +82,13 @@ echo " unzip wrf"  >> install-run-wrf.sh
 echo " rm wrf.zip"  >> install-run-wrf.sh 
 for (( i=1; i<$1; i++))
    do
-   echo "scp -r * thomas@wrfco250600000$i:/home/thomas" >> install-run-wrf.sh
+   echo "scp -r * $user@wrfco250600000$i:~" >> install-run-wrf.sh
    done
 echo " wget https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00" >> install-run-wrf.sh
 echo " wget https://hpccenth2lts.blob.core.windows.net/wrf/wrfbdy_d01" >> install-run-wrf.sh
 echo " mpirun -np " $((16*$1)) " -perhost 16 -hostfile ./hostfile ./wrf.exe" >> install-run-wrf.sh
 echo " grep 'Timing for main' rsl.error.0000 | tail -149 | awk '{print"' $9'"}' | awk -f stats.awk" >> install-run-wrf.sh
-scp -P 50000 ./install-run-wrf.sh thomas@$ipm:/home/thomas
+scp -P 50000 ./install-run-wrf.sh $user@$ipm:~
 
 echo "export INTELMPI_ROOT=/opt/intel/impi/5.1.3.223 "
 echo "export I_MPI_FABRICS=shm:dapl "
@@ -101,7 +102,7 @@ echo " wget https://hpccenth2lts.blob.core.windows.net/wrf/wrf.zip"
 echo " unzip wrf"
 echo " rm wrf.zip"
 echo " run ./install-run-wrf.sh"
-echo " scp -r * thomas@wrfvma244000001:/home/thomas "
+echo " scp -r * $user@wrfvma244000001:~ "
 echo " export LD_LIBRARY_PATH=./:"'$'"LD_LIBRARY_PATH"
 echo " no shared FS needed"
 echo " ulimit -s unlimited"
@@ -110,7 +111,7 @@ echo " wget https://hpccenth2lts.blob.core.windows.net/wrf/wrfbdy_d01"
 echo " mpirun -np $((16*$1)) -perhost 16 -hostfile ./hostfile ./wrf.exe "
 echo " grep 'Timing for main' rsl.error.0000 | tail -149 | awk '{print"' $9'"}' | awk -f stats.awk"
 
-echo "Connect  ssh thomas@"$ipm" -p 50000 "
+echo "Connect  ssh $user@"$ipm" -p 50000 "
 echo "./install-run-wrf.sh"
 echo "Content of your hostfile "
 cat hostfile
