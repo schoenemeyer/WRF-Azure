@@ -68,7 +68,7 @@ After the VMSS is created, you will get the command how to connect to the first 
 ```
 ssh username@<ip> -p 50000
 ```
-Doublecheck whether the hostname is correctly set in the hostfile
+Doublecheck whether the hostname is correctly set in the hostfile and start installation and running the benchmark:
 ```
 ./install-run-wrf.sh
 ```
