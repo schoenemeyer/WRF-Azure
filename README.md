@@ -60,7 +60,7 @@ Create a resource group that contains your private infrastructure in your prefer
 az group create -n wrflab -l northeurope  
 
 ```
-Decide for the number of nodes you are going to run, e.g. 2, and you will get a cluster with 2 nodes connected with FDR and CentOS 7.4 images with Intel MPI 5.1.3.223.
+Decide for the number of nodes you are going to run, e.g. 2, and you will get a cluster with 2 nodes connected with FDR and CentOS 7.4 images with Intel MPI 5.1.3.223. Make sure you set your username correctly in the third line in the script vmss-wrf.sh.
 ```
 ./vmss-wrf.sh 2
 ```
