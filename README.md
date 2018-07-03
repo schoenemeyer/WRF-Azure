@@ -33,7 +33,7 @@ This command will output the average time per time step as the mean value. Simul
 
 The Azure H-series virtual machines are built on the Intel Haswell E5-2667 V3 processor technology featuring DDR4 memory and SSD-based temporary storage.
 
-In addition to the substantial CPU power, the H-series offers diverse options for low latency RDMA networking using FDR InfiniBand and several memory configurations to support memory intensive computational requirements.
+In addition to the substantial CPU power, the H-series offers diverse options for low latency RDMA networking using FDR InfiniBand and several memory configurations to support memory intensive computational requirements. H-Series machines in Azure are running with HT disabled.
 https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-hpc
 
 
