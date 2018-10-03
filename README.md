@@ -2,6 +2,9 @@
 
 The purpose of this project is to demonstrate the possibility of running WRF3.8  using Azure HPC Infrastructure.
 The WRF3.8.1 is a community model maintained by NCAR/UCAR [https://www.mmm.ucar.edu/weather-research-and-forecasting-model ]
+
+The source code is available from this repository https://github.com/NCAR/WRFV3/releases
+
 WRF has been developed for various scenarios including simulating atmospheric chemistry as described in here https://www.imk-ifu.kit.edu/829.php. The asscociated paper is published in https://www.sciencedirect.com/science/article/pii/S1352231099004021.
 
 The video below shows a typical result of WRF simulating a tropical storm. The picture to the right shows the domain and the temperature and pressure after the 3rd hour of the 12km CONUS weather simulation.
@@ -14,12 +17,7 @@ You can also learn about installing WRF in this video
 https://www.youtube.com/watch?v=EMO6jreKi6o
 
 ## WRF CONUS 12km Benchmark
-In this benchmark from (http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. The input files to run this benchmark are available in http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3 or from Azure Blob Storage. The runscripts in this lab will automatically download the data. The Blob Storage location is just for your reference.
-
-```
-https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
-https://hpccenth2lts.blob.core.windows.net/wrf/wrf/wrfbdy_d01
-```
+In this benchmark from (http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. The input files to run this benchmark are available in http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3 or from Azure Blob Storage. The runscripts in this lab will automatically download the data. 
 
 ## Performance in Azure
 
