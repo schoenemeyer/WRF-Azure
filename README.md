@@ -17,11 +17,12 @@ You can also learn about installing WRF in this video
 https://www.youtube.com/watch?v=EMO6jreKi6o
 
 ## WRF CONUS 12km Benchmark
-In this benchmark from (http://www2.mmm.ucar.edu/wrf/WG2/benchv3) is used. The input files to run this benchmark are available in http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3 or from Azure Blob Storage. The runscripts in this lab will automatically download the data. 
+The inpudata for this benchmark can be obtained from (http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3/ . 
+The details and description of the benchmark can be found here : http://www2.mmm.ucar.edu/wrf/WG2/benchv3/#_Toc212961288 
 
 ## Performance in Azure
 
-Here is the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure. The simulation speed can be calculated by running this command after finishing the simulation. For performance measurement you will need the file stats.awk which can be also download from this repository https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/stats.awk 
+The figure below shows the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure. The simulation speed can be calculated by running this command after finishing the simulation. For performance measurement you will need the file stats.awk which can be also download from this repository https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/stats.awk 
 ```
 grep 'Timing for main' rsl.error.0000 | tail -149 | awk '{print $9}' | awk -f stats.awk
 ```
