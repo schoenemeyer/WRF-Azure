@@ -3,7 +3,8 @@
 The purpose of this project is to demonstrate the possibility of running WRF3.8  using Azure HPC Infrastructure.
 The WRF3.8.1 is a community model maintained by NCAR/UCAR [https://www.mmm.ucar.edu/weather-research-and-forecasting-model ]
 
-The source code is available from this repository https://github.com/NCAR/WRFV3/releases
+The source code is available from this repository https://github.com/NCAR/WRFV3/releases.
+In order to run this lab, it is not necessary to compile the model. The binaries for CentOS 7.4 will be automatically downloaded from Azure Blob Storage.
 
 WRF has been developed for various scenarios including simulating atmospheric chemistry as described in here https://www.imk-ifu.kit.edu/829.php. The asscociated paper is published in https://www.sciencedirect.com/science/article/pii/S1352231099004021.
 
