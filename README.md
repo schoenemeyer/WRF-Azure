@@ -29,7 +29,7 @@ grep 'Timing for main' rsl.error.0000 | tail -149 | awk '{print $9}' | awk -f st
 ```
 This command will output the average time per time step as the mean value. Simulation speed is the model time step, 72 seconds, divided by average time per time step. You can also derive the sustained Gigaflops per second which is simulation speed times 0.418 for this case.
 
-![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf3.8-128.gif)
+![After processing](https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/wrf3.8-256.gif)
 
 The Azure H-series virtual machines are built on the Intel Haswell E5-2667 V3 processor technology featuring DDR4 memory and SSD-based temporary storage.
 
