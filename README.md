@@ -31,7 +31,7 @@ sudo yum -y install devtoolset-6-gcc*
 mpirun -np 16 ./wrf.exe
 ```
 
-## Performance in Azure
+## Performance in Azure on multiple nodes
 
 The figure below shows the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure. The simulation speed can be calculated by running this command after finishing the simulation. For performance measurement you will need the file stats.awk which can be also download from this repository https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/stats.awk 
 ```
