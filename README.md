@@ -21,6 +21,28 @@ https://www.youtube.com/watch?v=EMO6jreKi6o
 The inpudata for this benchmark can be obtained from (http://www2.mmm.ucar.edu/WG2bench/conus12km_data_v3/ . 
 The details and description of the benchmark can be found here : http://www2.mmm.ucar.edu/wrf/WG2/benchv3/#_Toc212961288 
 
+
+## How to run
+
+Create a H16r VM in Azure with Centos 7.4 (this VM also includes FDR InfiniBand with the necessary IB drivers and Intel MPI)
+
+Login to the machine with ssh username@<id-adress>
+
+wget https://hpccenth2lts.blob.core.windows.net/wrf/wrf.zip
+wget https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
+wget https://hpccenth2lts.blob.core.windows.net/wrf/wrfbdy_d01
+
+unzip wrf.zip
+
+export LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH  
+export INTELMPI_ROOT=/opt/intel/impi/5.1.3.223 
+source /opt/intel/impi/5.1.3.223/bin64/mpivars.sh 
+sudo yum -y install centos-release-scl
+sudo yum -y install devtoolset-6-gcc*
+
+mpirun -np 16 ./wrf.exe
+
+
 ## Performance in Azure
 
 The figure below shows the performance for the CONUS 12km Benchmark you can expect on our H16r series in Azure. The simulation speed can be calculated by running this command after finishing the simulation. For performance measurement you will need the file stats.awk which can be also download from this repository https://github.com/schoenemeyer/WRF3.8-in-Azure/blob/master/stats.awk 
