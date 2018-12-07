@@ -15,7 +15,7 @@ The details and description of the benchmark can be found here : http://www2.mmm
 Create a H16r VM in Azure with Centos 7.4 (this VM also includes FDR InfiniBand with the necessary IB drivers and Intel MPI)
 
 Login to the machine with ssh username@<id-adress>
-
+```
 wget https://hpccenth2lts.blob.core.windows.net/wrf/wrf.zip
 wget https://hpccenth2lts.blob.core.windows.net/wrf/wrfrst_d01_2001-10-25_00_00_00
 wget https://hpccenth2lts.blob.core.windows.net/wrf/wrfbdy_d01
@@ -29,7 +29,7 @@ sudo yum -y install centos-release-scl
 sudo yum -y install devtoolset-6-gcc*
 
 mpirun -np 16 ./wrf.exe
-
+```
 
 ## Performance in Azure
 
